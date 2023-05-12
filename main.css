@@ -95,6 +95,7 @@ ul {
   justify-content: center;
   margin: 0;
   padding: 0;
+  cursor: pointer;
   display: none;
 }
 .navbar .container .middle .main .userAcuont img {
