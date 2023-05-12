@@ -259,7 +259,6 @@ ul {
 .content .container .middle #posts .card .body {
   background-color: white;
   padding: 12px 12px 0;
-  cursor: pointer;
 }
 .content .container .middle #posts .card .body img {
   width: 100%;
@@ -286,7 +285,6 @@ ul {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  cursor: pointer;
 }
 .content .container .middle #posts .card .foot .tags {
   margin-left: 17px;

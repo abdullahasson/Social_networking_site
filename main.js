@@ -76,7 +76,6 @@ function LogOutBtnClicked() {
         confirmButtonText: 'Logout'
       }).then((result) => {
         if (result.isConfirmed) {
-            window.close("./portfolio.html")
             window.localStorage.removeItem("user")
             window.localStorage.removeItem("tokenOfUser")
             window.location.reload()
@@ -148,7 +147,6 @@ function setupUi() {
         }
 
         document.getElementById("useraccout").style.display = "flex"
-        document.querySelector(`.sss`).style.display = "block"
         let info = JSON.parse(window.localStorage.getItem("user"))
         document.querySelector(`.navbar .container .middle .main .userAcuont img`).src = info.profile_image
         document.querySelector(`.navbar .container .middle .main .userAcuont b`).innerHTML = info.name
