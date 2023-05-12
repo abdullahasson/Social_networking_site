@@ -285,6 +285,8 @@ ul {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 .content .container .middle #posts .card .foot .tags {
   margin-left: 17px;
@@ -437,5 +439,33 @@ ul {
     border-bottom-left-radius: 10px;
     border-radius: 10px;
     transition: 0.3s;
+  }
+  .content .container .middle #posts .count {
+    flex-direction: column;
+    align-items: center;
+  }
+  .content .container .middle #posts .count .left {
+    flex-direction: column;
+  }
+  .content .container .middle #posts .count .left div {
+    margin: 10px 0 0 0;
+  }
+  .content .container .middle #posts .count .right {
+    margin: 15px 0 0 0;
+    align-items: center;
+  }
+  .content .container .middle #posts .count .right div {
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+  }
+  .content .container .middle #posts .count .right div h5 {
+    font-weight: 100;
+    font-size: 55px;
+    margin-right: 0;
+  }
+  .content .container .middle #posts .count .right div span {
+    width: 100%;
+    color: #666;
   }
 }/*# sourceMappingURL=main.css.map */
