@@ -274,7 +274,7 @@ function getPost(page = 1) {
                                 <hr>
                             </div>
                             <div class="foot">
-                                <p><i class=""></i> (${post.comments_count}) Commints</p>
+                                <p><i class="fa-sharp fa-solid fa-pen"></i> (${post.comments_count}) Commints</p>
                                 <div class="tags">${tag()}</div>
                             </div>
                         </div>

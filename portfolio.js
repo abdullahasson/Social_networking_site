@@ -47,7 +47,7 @@ function userInfo(parm) {
                         <hr>
                     </div>
                     <div class="foot">
-                        <p><i class="fa-thin fa-pen-nib"></i>(${iterr.comments_count}) Commints</p>
+                        <p><i class="fa-sharp fa-solid fa-pen"></i>(${iterr.comments_count}) Commints</p>
                         <div class="tags"></div>
                     </div>
                 </div>
