@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- icons -->
+    <link rel="stylesheet" href="./all.min.css">
+    <link rel="stylesheet" href="./main.css">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Molle&family=Open+Sans:ital,wght@0,700;0,800;1,600;1,700;1,800&family=Quicksand:wght@300;400;500;600;700&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body data-val="true">
+    <div class="navbar">
+        <div class="container"> 
+            <div class="middle">
+                <div class="main">
+                    <div class="info"> 
+                        <h1>Hasson</h1>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li class="sss" onclick="portfolio()"><a href="#">Portfolio</a></li>
+                        </ul>
+                    </div>
+                    <div class="userAcuont" id="useraccout">
+                        <img src="./images/avatar-06.png" alt="">
+                        <b>abdd</b>
+                    </div>
+                    <i class="fa-solid fa-bars" id="menu"></i>
+                    <div class="btns">
+                        <button id="Login-btn" onclick="LoginBtnClicked()">Login</button>
+                        <button id="Logout-btn" onclick="LogOutBtnClicked()">Logout</button>
+                        <button id="Register-btn" onclick="RegisterBtnClicked()">Register</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="container">
+            <div class="middle">
+                <div id="posts">
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="addPost" id="addPost" onclick="newPost()">+</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+    <script src="./main.js"></script>
+</body>
+</html>
+
