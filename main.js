@@ -1,22 +1,31 @@
+let imgplaceholder = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc83mFSqBl_YZ9dv2uDbUn5utQFPwA-Z-7oiLhgiqAsg&s"
+
+let filee = ""
+fetch(imgplaceholder)
+.then(req => req.blob())
+.then(blob => {
+    filee = new File([blob] , 'image' , {type : blob.type})
+})
+
 let UrL = "https://tarmeezAcademy.com/api/v1"
 // mune show
 let btn = document.getElementById("menu");
 let mune = document.querySelector(`.navbar .container .middle .main .btns`)
 
-btn.addEventListener("click" , () => {
+btn.addEventListener("click", () => {
+    btn.classList.toggle("fa-x")
     mune.classList.toggle("show");
 })
-
 let newPage = 1;
 let averag = document.documentElement.clientHeight;
 
 if (document.body.getAttribute("data-val") !== "false") {
-    window.addEventListener("scroll" , () => {
+    window.addEventListener("scroll", () => {
         let scrollY = window.scrollY;
         let pageHeight = document.documentElement.scrollHeight;
-    
+
         const scrolledEnd = (scrollY + averag) >= pageHeight;
-    
+
         if (scrolledEnd) {
             console.log("end")
             newPage += 1
@@ -33,35 +42,35 @@ async function LoginBtnClicked() {
     const { value: formValues } = await Swal.fire({
         title: 'Login',
         html:
-          '<label for="name">Username</label>' +
-          '<input id="name" class="swal2-input" type="text">' +
-          '<label for="password">Password</label>' +
-          '<input id="password" class="swal2-input" type="password">',
+            '<label for="name">Username</label>' +
+            '<input id="name" class="swal2-input" type="text">' +
+            '<label for="password">Password</label>' +
+            '<input id="password" class="swal2-input" type="password">',
         focusConfirm: false,
-        showCancelButton : true,
+        showCancelButton: true,
         preConfirm: () => {
-          return [
-            document.getElementById('name').value,
-            document.getElementById('password').value
-          ]
+            return [
+                document.getElementById('name').value,
+                document.getElementById('password').value
+            ]
         }
-      })
-      
-      if (formValues) {
+    })
+
+    if (formValues) {
         let parms = {
-                "username" : formValues[0],
-                "password" : formValues[1]
+            "username": formValues[0],
+            "password": formValues[1]
         }
-        axios.post(`${UrL}/login` , parms)
-        .then((response) => {
-            window.localStorage.setItem("user" , JSON.stringify(response.data.user))
-            window.localStorage.setItem("tokenOfUser" , response.data.token)
-            successfully()
-        }).catch(() => {
-            let er = 'This account is not valid'
-            fail(er)
-        })
-      }
+        axios.post(`${UrL}/login`, parms)
+            .then((response) => {
+                window.localStorage.setItem("user", JSON.stringify(response.data.user))
+                window.localStorage.setItem("tokenOfUser", response.data.token)
+                successfully()
+            }).catch(() => {
+                let er = 'This account is not valid'
+                fail(er)
+            })
+    }
 }
 
 // When user click on logout btn 
@@ -74,14 +83,14 @@ function LogOutBtnClicked() {
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Logout'
-      }).then((result) => {
+    }).then((result) => {
         if (result.isConfirmed) {
             window.localStorage.removeItem("user")
             window.localStorage.removeItem("tokenOfUser")
             window.location.reload()
         }
-      })
-      
+    })
+
 }
 
 // when user click on register
@@ -89,59 +98,60 @@ async function RegisterBtnClicked() {
     const { value: formValues } = await Swal.fire({
         title: 'Register',
         html:
-          '<input id="swal-input1" class="swal2-input" style="width: 80%;" placeholder="Enter your name">' +
-          '<input id="swal-input2" class="swal2-input" style="width: 80%;" placeholder="Enter your Username">' +
-          '<input type="file" id="swal-input3" class="swal2-input sp" style="width: 80%;" placeholder="select image">' +
-          '<input id="swal-input4" class="swal2-input" style="width: 80%;" type="password" placeholder="Enter your password">',
+            '<input id="swal-input1" class="swal2-input" style="width: 80%;" placeholder="Enter your name">' +
+            '<input id="swal-input2" class="swal2-input" style="width: 80%;" placeholder="Enter your Username">' +
+            `<input type="file" id="swal-input3" class="swal2-input sp" style="width: 80%;">` +
+            '<input id="swal-input4" class="swal2-input" style="width: 80%;" type="password" placeholder="Enter your password">',
         focusConfirm: false,
-        showCancelButton : true,
+        showCancelButton: true,
         preConfirm: () => {
-          return [
-            document.getElementById('swal-input1').value,
-            document.getElementById('swal-input2').value,
-            document.getElementById('swal-input3').files[0],
-            document.getElementById('swal-input4').value
-          ]
+            return [
+                document.getElementById('swal-input1').value,
+                document.getElementById('swal-input2').value,
+                document.getElementById('swal-input3').files[0],
+                document.getElementById('swal-input4').value
+            ]
         }
-      })
-      
-      if (formValues) {
-        let fromdata = new FormData()
-        fromdata.append("name" , formValues[0])
-        fromdata.append("username" , formValues[1])
-        fromdata.append("image" , formValues[2])
-        fromdata.append("password" , formValues[3])
+    })
 
-        axios.post(`${UrL}/register` , fromdata , {
-            headers : {
-                "Content-Type" : "multipart/from-data"
+    
+    if (formValues) {
+        let fromdata = new FormData()
+        fromdata.append("name", formValues[0])
+        fromdata.append("username", formValues[1])
+        fromdata.append("image", formValues[2] || filee)
+        fromdata.append("password", formValues[3])
+
+        axios.post(`${UrL}/register`, fromdata, {
+            headers: {
+                "Content-Type": "multipart/from-data"
             }
         })
-        .then((response) => {
-            window.localStorage.setItem("user" , JSON.stringify(response.data.user))
-            window.localStorage.setItem("tokenOfUser" , response.data.token)
-            successfully()
-        }).catch((error) => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: `${error.response.data.message}`,
-              })
-        })
+            .then((response) => {
+                window.localStorage.setItem("user", JSON.stringify(response.data.user))
+                window.localStorage.setItem("tokenOfUser", response.data.token)
+                successfully()
+            }).catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${error.response.data.message}`,
+                })
+            })
     }
 }
 
 // setup UI page 
 function setupUi() {
     let token = window.localStorage.getItem("tokenOfUser")
-    
+
     if (token == null) {
-       
+
     } else {
         document.getElementById("Login-btn").style.display = "none"
         document.getElementById("Register-btn").style.display = "none"
         document.getElementById("Logout-btn").style.display = "block"
-        
+
         if (document.body.getAttribute("data-val") !== "false") {
             document.getElementById("addPost").style.display = "block"
         }
@@ -151,7 +161,7 @@ function setupUi() {
         document.querySelector(`.navbar .container .middle .main .userAcuont img`).src = info.profile_image
         document.querySelector(`.navbar .container .middle .main .userAcuont b`).innerHTML = info.name
     }
-} 
+}
 
 
 // New post to creat
@@ -166,38 +176,38 @@ async function newPost() {
             </form>
         `,
         preConfirm: () => {
-          return [
-            document.getElementById('swal-input1').value,
-            document.getElementById('swal-input2').value,
-            document.getElementById('swal-input3').files[0]
-          ]
+            return [
+                document.getElementById('swal-input1').value,
+                document.getElementById('swal-input2').value,
+                document.getElementById('swal-input3').files[0]
+            ]
         }
-      })
-      
-      if (formValues) {
+    })
+
+    if (formValues) {
 
         let fromdata = new FormData()
-        fromdata.append("title" , formValues[0])
-        fromdata.append("body" , formValues[1])
-        fromdata.append("image" , formValues[2])
-        
-        axios.post(`https://tarmeezAcademy.com/api/v1/posts` , fromdata , {
-            headers : {
-                "Content-Type" : "multipart/from-data",
-                "authorization" : `Bearer ${window.localStorage.getItem("tokenOfUser")}`
+        fromdata.append("title", formValues[0])
+        fromdata.append("body", formValues[1])
+        fromdata.append("image", formValues[2])
+
+        axios.post(`https://tarmeezAcademy.com/api/v1/posts`, fromdata, {
+            headers: {
+                "Content-Type": "multipart/from-data",
+                "authorization": `Bearer ${window.localStorage.getItem("tokenOfUser")}`
             }
         })
-        .then((response) => {
-            successfully()
-        }).catch((error) => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: `${error.response.data.message}`,
-              })
-        })
+            .then((response) => {
+                successfully()
+            }).catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${error.response.data.message}`,
+                })
+            })
 
-      }
+    }
 }
 
 
@@ -210,15 +220,15 @@ function successfully() {
         timer: 2000,
         timerProgressBar: true,
         didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
-      })
-      
-      Toast.fire({
+    })
+
+    Toast.fire({
         icon: 'success',
         title: 'successfully'
-      })
+    })
 
     setTimeout(() => {
         window.location.reload()
@@ -231,7 +241,7 @@ function fail(massegeError) {
         icon: 'error',
         title: 'Oops...',
         text: `${massegeError}`,
-        })
+    })
 }
 
 getPost()
@@ -241,24 +251,24 @@ let postsContainer = document.getElementById("posts")
 function getPost(page = 1) {
     if (document.body.getAttribute("data-val") == 'true') {
         axios.get(`https://tarmeezAcademy.com/api/v1/posts?limit=4&page=${page}`)
-        .then((response) => {
-            let posts = response.data.data
-    
-            lastPage = response.data.meta.last_page
-    
-            
-            for(post of posts) {
-                let em = document.createElement("div")
-                function tag() {
-                    for (tag of post.tags) {
-                        let comt = `<span>${tag.name}</span>`
-                        em.innerHTML += comt
-                    }
-                    return em.innerHTML
-                }
+            .then((response) => {
+                let posts = response.data.data
 
-                let contentt = 
-                    `
+                lastPage = response.data.meta.last_page
+
+
+                for (post of posts) {
+                    let em = document.createElement("div")
+                    function tag() {
+                        for (tag of post.tags) {
+                            let comt = `<span>${tag.name}</span>`
+                            em.innerHTML += comt
+                        }
+                        return em.innerHTML
+                    }
+
+                    let contentt =
+                        `
                         <div class="card" id="${post.id}" onclick="showPost(${post.id})">
                             <div class="head">
                                 <div>
@@ -279,21 +289,21 @@ function getPost(page = 1) {
                             </div>
                         </div>
                     `
-                postsContainer.innerHTML += contentt   
-            }
-           
-        })
+                    postsContainer.innerHTML += contentt
+                }
+
+            })
     }
 }
 
 // Show Post 
 function showPost(parm) {
     if (window.localStorage.getItem("tokenOfUser") !== null) {
-        window.open("./showPost.html" , "_self").sessionStorage.setItem("idOfuser" , parm)
+        window.open("./showPost.html", "_self").sessionStorage.setItem("idOfuser", parm)
     }
 }
 
 
 function portfolio() {
-    window.open("./portfolio.html" , "_self")
+    window.open("./portfolio.html", "_self")
 }
