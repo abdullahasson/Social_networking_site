@@ -14,7 +14,7 @@ function creatAbigPost(parm) {
         <div class="card" id="${post.id}">
             <div class="head">
                 <div>
-                    <img src="${post.author.profile_image}" alt="">
+                    <img src="${post.author.profile_image == "[object Object]" ? "./images/تنزيل (2).jpg" : post.author.profile_image}" alt="">
                     <b>${post.author.username}</b>
                 </div>
             </div>
@@ -55,7 +55,7 @@ function creatAbigPost(parm) {
             `
             <div>
                 <div>
-                    <img src="${iter.author.profile_image}">
+                    <img src="${iter.author.profile_image == "[object Object]" ? "./images/تنزيل (2).jpg" : iter.author.profile_image}">
                     <h3>${iter.author.username}</h3>
                 </div>
                 <p>${iter.body}</p>                                                             

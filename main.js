@@ -158,7 +158,7 @@ function setupUi() {
 
         document.getElementById("useraccout").style.display = "flex"
         let info = JSON.parse(window.localStorage.getItem("user"))
-        document.querySelector(`.navbar .container .middle .main .userAcuont img`).src = info.profile_image
+        document.querySelector(`.navbar .container .middle .main .userAcuont img`).src = info.profile_image == "[object Object]" ? "./images/تنزيل (2).jpg" : info.profile_image
         document.querySelector(`.navbar .container .middle .main .userAcuont b`).innerHTML = info.name
     }
 }
@@ -272,7 +272,7 @@ function getPost(page = 1) {
                         <div class="card" id="${post.id}" onclick="showPost(${post.id})">
                             <div class="head">
                                 <div>
-                                    <img src="${post.author.profile_image}" alt="">
+                                    <img src="${post.author.profile_image == "[object Object]" ? "./images/تنزيل (2).jpg" : post.author.profile_image}" alt="">
                                     <b>${post.author.username}</b>
                                 </div>
                             </div>

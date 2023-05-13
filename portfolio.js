@@ -8,7 +8,7 @@ function userInfo(parm) {
 
         let conte = `
             <div class="left">
-                <img src="${rr.profile_image}" alt="">
+                <img src="${rr.profile_image == "[object Object]" ? "./images/تنزيل (2).jpg" : rr.profile_image}" alt="">
                 <div>
                     <h3>${rr.name}</h3>
                     <h3>${rr.username}</h3>
@@ -30,7 +30,7 @@ function userInfo(parm) {
                 <div class="card" id="${iterr.id}">
                     <div class="head">
                         <div>
-                            <img src="${iterr.author.profile_image}" alt="">
+                            <img src="${iterr.author.profile_image == "[object Object]" ? "./images/تنزيل (2).jpg" : iterr.author.profile_image}" alt="">
                             <b>${iterr.author.username}</b>
                         </div>
 
