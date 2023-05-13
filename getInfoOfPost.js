@@ -26,13 +26,12 @@ function creatAbigPost(parm) {
                 <hr>
             </div>
             <div class="foot">
-                <p><i class="fa-sharp fa-solid fa-pen"></i> (${post.comments_count}) Commints</p>
+                <p><i class="fa-sharp fa-solid fa-pen"></i> (${post.comments_count}) Comments</p>
                 <div class="tags"></div>
                 <div class="commints">
-
                     <div class="Newcommint">
                         <form action="">
-                            <input type="text"  placeholder="Write commints">
+                            <input type="text"  placeholder="Write Comment">
                             <input type="submit" value="Send">
                         </form>
                     </div>

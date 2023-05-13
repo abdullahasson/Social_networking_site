@@ -47,7 +47,7 @@ function userInfo(parm) {
                         <hr>
                     </div>
                     <div class="foot">
-                        <p><i class="fa-sharp fa-solid fa-pen"></i>(${iterr.comments_count}) Commints</p>
+                        <p><i class="fa-sharp fa-solid fa-pen"></i>(${iterr.comments_count}) comments</p>
                         <div class="tags"></div>
                     </div>
                 </div>
@@ -116,7 +116,6 @@ async function adite(parm) {
             }
         })
         .then((response) => {
-            // successfully()
             console.log(response)
         })
     }
