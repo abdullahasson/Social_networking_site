@@ -214,6 +214,7 @@ ul {
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
   margin-bottom: 30px;
+  cursor: pointer;
 }
 .content .container .middle #posts .card .head {
   padding: 10px 14px;
