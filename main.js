@@ -33,18 +33,20 @@ let averag = document.documentElement.clientHeight;
 
 function endofpagenewposts() {
     if (document.body.getAttribute("data-val") !== "false") {
-        window.addEventListener("scroll", () => {
-            let scrollY = window.scrollY + 3;
-            let pageHeight = document.documentElement.scrollHeight;
-    
-            const scrolledEnd = (scrollY + averag) >= pageHeight;
-    
-            if (scrolledEnd) {
+        const container = document.getElementById('posts');
+        // The Scroll Event.
+        window.addEventListener('scroll',()=>{
+            const {scrollHeight,scrollTop,clientHeight} = document.documentElement;
+            if(scrollTop + clientHeight > scrollHeight - 5){
                 console.log("end")
-                newPage += 1
-                getPost(newPage)
+                setTimeout(() => {
+                    console.log("end")
+                    newPage += 1
+                    getPost(newPage)
+                } ,2000);
             }
-        })
+        });
+        
     }
 }
 
