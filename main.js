@@ -1,3 +1,22 @@
+if (document.body.getAttribute("data-val") !== "false") {
+    // Log in and sign up animation
+    const wrapper = document.querySelector(`.wrapper`)
+    const signUpLink = document.querySelector(`.signUp-link`)
+    const signInLink = document.querySelector(`.signin-link`)
+
+    signUpLink.addEventListener('click' , () => {
+        wrapper.classList.add('animate-signIn')
+        wrapper.classList.remove('animate-signUp')
+    })
+
+    signInLink.addEventListener('click' , () => {
+        wrapper.classList.add('animate-signUp')
+        wrapper.classList.remove('animate-signIn')
+    })
+}
+
+
+
 let imgplaceholder = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc83mFSqBl_YZ9dv2uDbUn5utQFPwA-Z-7oiLhgiqAsg&s"
 
 let filee = ""
@@ -8,58 +27,39 @@ fetch(imgplaceholder)
 })
 
 let UrL = "https://tarmeezAcademy.com/api/v1"
-// mune show
-let btn = document.getElementById("menu");
-let mune = document.querySelector(`.navbar .container .middle .main .btns`)
 
-btn.addEventListener("click", () => {
-    btn.classList.toggle("fa-x")
-    mune.classList.toggle("show");
-})
 let newPage = 1;
 let averag = document.documentElement.clientHeight;
 
-if (document.body.getAttribute("data-val") !== "false") {
-    window.addEventListener("scroll", () => {
-        let scrollY = window.scrollY;
-        let pageHeight = document.documentElement.scrollHeight;
-
-        const scrolledEnd = (scrollY + averag) >= pageHeight;
-
-        if (scrolledEnd) {
-            console.log("end")
-            newPage += 1
-            getPost(newPage)
-        }
-    })
+function endofpagenewposts() {
+    if (document.body.getAttribute("data-val") !== "false") {
+        window.addEventListener("scroll", () => {
+            let scrollY = window.scrollY + 3;
+            let pageHeight = document.documentElement.scrollHeight;
+    
+            const scrolledEnd = (scrollY + averag) >= pageHeight;
+    
+            if (scrolledEnd) {
+                console.log("end")
+                newPage += 1
+                getPost(newPage)
+            }
+        })
+    }
 }
 
 // check if the user is log in
 setupUi()
 
 // show login massege 
-async function LoginBtnClicked() {
-    const { value: formValues } = await Swal.fire({
-        title: 'Login',
-        html:
-            '<label for="name">Username</label>' +
-            '<input id="name" class="swal2-input" type="text">' +
-            '<label for="password">Password</label>' +
-            '<input id="password" class="swal2-input" type="password">',
-        focusConfirm: false,
-        showCancelButton: true,
-        preConfirm: () => {
-            return [
-                document.getElementById('name').value,
-                document.getElementById('password').value
-            ]
-        }
-    })
-
-    if (formValues) {
+if (document.body.getAttribute("data-val") !== "false") {
+    document.querySelector(`.log`).addEventListener("submit" , (eve) => {
+        let username = document.querySelector(`.log .input-group input[type = "text"]`).value
+        let password = document.querySelector(`.log .input-group input[type = "password"]`).value
+    
         let parms = {
-            "username": formValues[0],
-            "password": formValues[1]
+            "username": username,
+            "password": password
         }
         axios.post(`${UrL}/login`, parms)
             .then((response) => {
@@ -69,8 +69,10 @@ async function LoginBtnClicked() {
             }).catch(() => {
                 let er = 'This account is not valid'
                 fail(er)
-            })
-    }
+        })
+    
+        eve.preventDefault();
+    })
 }
 
 // When user click on logout btn 
@@ -90,38 +92,23 @@ function LogOutBtnClicked() {
             window.location.reload()
         }
     })
-
 }
 
 // when user click on register
-async function RegisterBtnClicked() {
-    const { value: formValues } = await Swal.fire({
-        title: 'Register',
-        html:
-            '<input id="swal-input1" class="swal2-input" style="width: 80%;" placeholder="Enter your name">' +
-            '<input id="swal-input2" class="swal2-input" style="width: 80%;" placeholder="Enter your Username">' +
-            `<input type="file" id="swal-input3" class="swal2-input sp" style="width: 80%;">` +
-            '<input id="swal-input4" class="swal2-input" style="width: 80%;" type="password" placeholder="Enter your password">',
-        focusConfirm: false,
-        showCancelButton: true,
-        preConfirm: () => {
-            return [
-                document.getElementById('swal-input1').value,
-                document.getElementById('swal-input2').value,
-                document.getElementById('swal-input3').files[0],
-                document.getElementById('swal-input4').value
-            ]
-        }
-    })
+if (document.body.getAttribute("data-val") !== "false") {
+    document.querySelector('.sig').addEventListener("submit" , (eve) => {
 
+        let name = document.querySelector(`.sig .name`).value
+        let username = document.querySelector(`.sig .username`).value
+        let img =  document.querySelector(`.sig .input-group input[type = "file"]`).files[0]
+        let password = document.querySelector(`.sig .input-group input[type = "password"]`).value
     
-    if (formValues) {
         let fromdata = new FormData()
-        fromdata.append("name", formValues[0])
-        fromdata.append("username", formValues[1])
-        fromdata.append("image", formValues[2] || filee)
-        fromdata.append("password", formValues[3])
-
+        fromdata.append("name", name)
+        fromdata.append("username", username)
+        fromdata.append("image", img || filee)
+        fromdata.append("password", password)
+    
         axios.post(`${UrL}/register`, fromdata, {
             headers: {
                 "Content-Type": "multipart/from-data"
@@ -138,7 +125,9 @@ async function RegisterBtnClicked() {
                     text: `${error.response.data.message}`,
                 })
             })
-    }
+    
+        eve.preventDefault();
+    })
 }
 
 // setup UI page 
@@ -148,14 +137,19 @@ function setupUi() {
     if (token == null) {
 
     } else {
-        document.getElementById("Login-btn").style.display = "none"
-        document.getElementById("Register-btn").style.display = "none"
-        document.getElementById("Logout-btn").style.display = "block"
+        getPost()
+        endofpagenewposts()
+        document.querySelector(`.navbar .container .middle .main`).style.cssText = `
+        width: 100%;
+        margin: auto;
+        justify-content: space-between;
 
+        `
+        document.querySelector(`.sss`).style.display = "block"
         if (document.body.getAttribute("data-val") !== "false") {
             document.getElementById("addPost").style.display = "block"
+            document.querySelector('.wrapper').style.display = "none"
         }
-
         document.getElementById("useraccout").style.display = "flex"
         let info = JSON.parse(window.localStorage.getItem("user"))
         document.querySelector(`.navbar .container .middle .main .userAcuont img`).src = info.profile_image == "[object Object]" ? "./images/تنزيل (2).jpg" : info.profile_image
@@ -243,8 +237,6 @@ function fail(massegeError) {
         text: `${massegeError}`,
     })
 }
-
-getPost()
 
 // All The Posts in main Page
 let postsContainer = document.getElementById("posts")

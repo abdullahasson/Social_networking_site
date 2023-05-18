@@ -18,6 +18,9 @@ function userInfo(parm) {
                 <div><h5>${rr.posts_count}</h5><span>Posts</span></div>
                 <div><h5>${rr.comments_count}</h5><span>comments</span></div>
             </div>
+            <div class="rigt">
+                <button id="Logout-btn" onclick="LogOutBtnClicked()">Logout</button>
+            </div>
         `
 
         document.querySelector(`.count`).innerHTML = conte
