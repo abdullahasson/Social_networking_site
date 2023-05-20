@@ -161,7 +161,7 @@ ul {
   margin-top: 25px;
 }
 .content .container .middle #posts h1 {
-  margin: 40px 0;
+  margin: 50px 0 40px;
 }
 .content .container .middle #posts .count {
   padding: 20px;
@@ -247,6 +247,10 @@ ul {
   -o-border-radius: 50%;
 }
 
+.content .container .middle #posts .count {
+  position: relative;
+}
+
 #Logout-btn,
 .content .container .middle #posts .card .head .btns button {
   padding: 5px;
@@ -273,6 +277,7 @@ ul {
 }
 .content .container .middle #posts .card .body img {
   width: 100%;
+  max-height: 80vh;
   margin-bottom: 5px;
 }
 .content .container .middle #posts .card .body span {
@@ -469,6 +474,9 @@ ul {
     width: 100%;
     flex-direction: column;
     text-align: center;
+  }
+  .content .container .middle #posts .count .right div:first-child {
+    margin-bottom: 15px;
   }
   .content .container .middle #posts .count .right div h5 {
     font-weight: 100;
@@ -743,6 +751,7 @@ ul {
     height: 80px;
     left: 50%;
     transform: translateX(-50%);
+    display: none;
 }
 .lds-ripple div {
   position: absolute;
@@ -785,4 +794,114 @@ ul {
   }
 }
 
+#Logout-btn {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin: 0;
+  transform: translate(-50% , 0);
+  padding: 12px;
+  border: none;
+  background: #cdcdcd;
+  display: none;
+  transition: 0.3s;
+}
+
+.swal2-container.swal2-center>.swal2-popup {
+  background: #dcdcdc;
+}
+
+.comm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px 0;
+  max-height: 403px;
+  overflow: auto;
+}
+
+.comm::-webkit-scrollbar {
+  width: 10px;
+}
+
+@media (max-width : 500px) {
+  .comm::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+
+.comm::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.comm::-webkit-scrollbar-thumb {
+  background-color: turquoise;
+  border-radius: 100vmax;
+  -webkit-border-radius: 100vmax;
+  -moz-border-radius: 100vmax;
+  -ms-border-radius: 100vmax;
+  -o-border-radius: 100vmax;
+}
+.comm::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(36, 233, 213);
+}
+
+
+.comm > div {
+  background-color: white;
+  padding: 10px;
+  border-radius: 12px;
+  text-align: start;
+}
+
+.comm > div > div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.comm > div > div h3 {
+  margin-left: 6px;
+}
+
+.comm img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+
+
+.Newcommint {
+  background-color: white;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 12px;
+}
+
+.Newcommint form {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.Newcommint form input[type ="text"] {
+  padding: 8px;
+  border-radius: 100vmax;
+  width: 88%;
+  border: 1px solid;
+  border-color: #ccc;
+  outline: none;
+}
+
+.Newcommint form input[type = "submit"] {
+  border-radius: 100vmax;
+  padding: 5px;
+  border: 1px solid;
+  border-color: #ccc;
+  font-size: 14px;
+  cursor: pointer;
+}
 /*# sourceMappingURL=main.css.map */

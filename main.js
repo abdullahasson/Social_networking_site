@@ -39,11 +39,9 @@ function endofpagenewposts() {
             const {scrollHeight,scrollTop,clientHeight} = document.documentElement;
             if(scrollTop + clientHeight > scrollHeight - 5){
                 console.log("end")
-                setTimeout(() => {
-                    console.log("end")
-                    newPage += 1
-                    getPost(newPage)
-                } ,2000);
+                newPage += 1
+                window.sessionStorage.setItem("numofpage" , newPage)
+                getPost(newPage)
             }
         });
         
@@ -149,6 +147,8 @@ function setupUi() {
         `
         document.querySelector(`.sss`).style.display = "block"
         if (document.body.getAttribute("data-val") !== "false") {
+            document.querySelector(`.lds-ripple`).style.display = "block"
+            document.getElementById("Logout-btn").style.display = "block"
             document.getElementById("addPost").style.display = "block"
             document.querySelector('.wrapper').style.display = "none"
         }
@@ -278,7 +278,7 @@ function getPost(page = 1) {
                                 <hr>
                             </div>
                             <div class="foot">
-                                <p><i class="fa-sharp fa-solid fa-pen"></i> (${post.comments_count}) Commints</p>
+                                <p><i class="fa-sharp fa-solid fa-pen"></i> (<span id="${post.id}com">${post.comments_count}</span>) comments</p>
                                 <div class="tags">${tag()}</div>
                             </div>
                         </div>
@@ -292,11 +292,87 @@ function getPost(page = 1) {
 
 // Show Post 
 function showPost(parm) {
-    if (window.localStorage.getItem("tokenOfUser") !== null) {
-        window.open("./showPost.html", "_self").sessionStorage.setItem("idOfuser", parm)
-    }
+    axios.get(`https://tarmeezAcademy.com/api/v1/posts/${parm}`)
+    .then((response) => {
+        let post = response.data.data
+        Swal.fire({
+            title: 'comments!',
+            html : `
+            <div class="Newcommint">
+                <form action="">
+                    <input type="text"  placeholder="Write Comment">
+                    <input type="submit" value="Send">
+                </form>
+            </div>
+            <div class="comm"></div>
+            `
+        })
+
+        creatcomm(parm)
+
+
+        for (const iter of post.comments) {
+            let comt = 
+            `
+            <div>
+                <div>
+                    <img src="${iter.author.profile_image == "[object Object]" ? "./images/تنزيل (2).jpg" : iter.author.profile_image}">
+                    <h3>${iter.author.username}</h3>
+                </div>
+                <p>${iter.body}</p>                                                             
+            </div>
+            `
+
+            document.querySelector(`.comm`).innerHTML += comt
+        }
+
+    })
 }
 
+
+function creatcomm(parm) {
+    document.querySelector(`.Newcommint form`).onsubmit = function(eve) {
+        eve.preventDefault();
+    
+    
+        let postId = document.querySelector(`.card`).id
+        let values = document.querySelector(`.Newcommint form input[type="text"]`).value
+    
+        let ob = {
+            "body" : values
+        }
+        let tok = window.localStorage.getItem("tokenOfUser")
+        
+        axios.post(`https://tarmeezAcademy.com/api/v1/posts/${parm}/comments` , ob , {
+            headers : {
+                "authorization" : `Bearer ${tok}`
+            }
+        })
+        .then((response) => {
+            document.querySelector(`.Newcommint form input[type="text"]`).value = ""
+            document.getElementById(`${parm}com`).innerHTML = +(document.getElementById(`${parm}com`).innerHTML) + 1
+            axios.get(`https://tarmeezAcademy.com/api/v1/posts/${parm}`)
+            .then((response) => {        
+                let post = response.data.data
+                document.querySelector(`.comm`).innerHTML = ""
+                for (const iter of post.comments) {
+                    let comt = 
+                    `
+                    <div>
+                        <div>
+                            <img src="${iter.author.profile_image == "[object Object]" ? "./images/تنزيل (2).jpg" : iter.author.profile_image}">
+                            <h3>${iter.author.username}</h3>
+                        </div>
+                        <p>${iter.body}</p>                                                             
+                    </div>
+                    `
+        
+                    document.querySelector(`.comm`).innerHTML += comt
+                }
+            })
+        })
+    }    
+}
 
 function portfolio() {
     window.open("./portfolio.html", "_self")
