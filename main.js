@@ -298,13 +298,13 @@ function showPost(parm) {
         Swal.fire({
             title: 'comments!',
             html : `
+            <div class="comm"></div>
             <div class="Newcommint">
                 <form action="">
                     <input type="text"  placeholder="Write Comment">
                     <input type="submit" value="Send">
                 </form>
             </div>
-            <div class="comm"></div>
             `
         })
 

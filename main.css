@@ -823,12 +823,6 @@ ul {
   width: 10px;
 }
 
-@media (max-width : 500px) {
-  .comm::-webkit-scrollbar {
-    width: 5px;
-  }
-}
-
 .comm::-webkit-scrollbar-track {
   background-color: transparent;
 }
@@ -876,7 +870,7 @@ ul {
 
 .Newcommint {
   background-color: white;
-  margin-bottom: 15px;
+  margin-top: 20px;
   padding: 15px;
   border-radius: 12px;
 }
@@ -903,5 +897,47 @@ ul {
   border-color: #ccc;
   font-size: 14px;
   cursor: pointer;
+}
+
+@media (max-width : 512px) {
+  .container {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .Newcommint {
+    padding: 10px;
+  }
+
+  .content .container .middle #posts .card {
+    margin-bottom: 15px;
+  }
+
+  .comm::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  .comm {
+    max-height: 203px;
+  }
+
+  .comm > div {
+    padding: 5px;
+  }
+
+  .comm > div > div img {
+    width: 35px;
+    height: 35px;
+  }
+
+
+  .comm > div > div h3 {
+    font-size: 13px;
+  }
+
+  #swal2-html-container {
+    margin: 0;
+    padding: 20px 10px 0;
+  }
 }
 /*# sourceMappingURL=main.css.map */
