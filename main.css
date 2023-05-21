@@ -53,6 +53,17 @@ ul {
     width: 100%;
   }
 }
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  z-index: 9999999;
+}
 .navbar .container .middle .main {
   padding: 20px;
   width: 400px;
@@ -159,6 +170,9 @@ ul {
 
 .content {
   margin-top: 25px;
+}
+#posts {
+  margin-top: 100px;
 }
 .content .container .middle #posts h1 {
   margin: 50px 0 40px;
@@ -407,6 +421,7 @@ ul {
   margin: 0;
   width: 100%;
   margin-bottom: 8px;
+  background-color: white;
 }
 .addpostform textarea {
   margin: 0;
@@ -415,6 +430,7 @@ ul {
   resize: none;
   margin-bottom: 8px;
   padding: 10px;
+  background-color: white;
 }
 
 .sp {
@@ -919,10 +935,12 @@ ul {
 
   .comm {
     max-height: 203px;
+    gap: 0;
   }
 
   .comm > div {
     padding: 5px;
+    margin-bottom: 9px;
   }
 
   .comm > div > div img {
@@ -939,5 +957,9 @@ ul {
     margin: 0;
     padding: 20px 10px 0;
   }
+}
+
+.swal2-center {
+  z-index: 100000000000;
 }
 /*# sourceMappingURL=main.css.map */

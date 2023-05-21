@@ -26,6 +26,13 @@ fetch(imgplaceholder)
     filee = new File([blob] , 'image' , {type : blob.type})
 })
 
+let noimageforpost = ""
+fetch(`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6V_R6WMnHzN5bpexR-vQ1tNickx9phBGTHA&usqp=CAU`)
+.then(req => req.blob())
+.then(blob => {
+    noimageforpost = new File([blob] , 'image' , {type : blob.type})
+})
+
 let UrL = "https://tarmeezAcademy.com/api/v1"
 
 let newPage = 1;
@@ -185,7 +192,7 @@ async function newPost() {
         let fromdata = new FormData()
         fromdata.append("title", formValues[0])
         fromdata.append("body", formValues[1])
-        fromdata.append("image", formValues[2])
+        fromdata.append("image", formValues[2] || noimageforpost)
 
         axios.post(`https://tarmeezAcademy.com/api/v1/posts`, fromdata, {
             headers: {
@@ -202,7 +209,6 @@ async function newPost() {
                     text: `${error.response.data.message}`,
                 })
             })
-
     }
 }
 
