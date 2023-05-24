@@ -46,7 +46,7 @@ function userInfo(parm) {
                         <p>${iterr.body}</p>
                         <hr>
                     </div>
-                    <div class="foot">
+                    <div class="foot" onclick = "comments(${iterr.id})">
                         <p><i class="fa-sharp fa-solid fa-pen"></i>(${iterr.comments_count}) comments</p>
                         <div class="tags"></div>
                     </div>
@@ -83,6 +83,15 @@ function del(parm) {
     })
 }
 
+
+let afasdfa = ""
+fetch(`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6V_R6WMnHzN5bpexR-vQ1tNickx9phBGTHA&usqp=CAU`)
+.then(req => req.blob())
+.then(blob => {
+    afasdfa = new File([blob] , 'image' , {type : blob.type})
+})
+
+
 async function adite(parm) {
     const { value: formValues } = await Swal.fire({
         title: 'add post',
@@ -107,7 +116,7 @@ async function adite(parm) {
         let ob = {
             "title":formValues[0],
             "body":formValues[1],
-            "image":formValues[2] 
+            "image":formValues[2]
         }
         
         axios.put(`https://tarmeezAcademy.com/api/v1/posts/${parm}` , ob , {
@@ -119,4 +128,33 @@ async function adite(parm) {
             console.log(response)
         })
     }
+}
+
+
+function comments(parm) {
+    axios.get(`https://tarmeezAcademy.com/api/v1/posts/${parm}`)
+    .then((response) => {
+        let post = response.data.data
+        Swal.fire({
+            title: 'comments!',
+            html : `
+            <div class="comm"></div>
+            `
+        })
+
+        for (const iter of post.comments) {
+            let comt = 
+            `
+            <div>
+                <div>
+                    <img src="${iter.author.profile_image == "[object Object]" ? "./images/تنزيل (2).jpg" : iter.author.profile_image}">
+                    <h3>${iter.author.username}</h3>
+                </div>
+                <p>${iter.body}</p>                                                             
+            </div>
+            `
+            document.querySelector(`.comm`).innerHTML += comt
+        }
+
+    })
 }

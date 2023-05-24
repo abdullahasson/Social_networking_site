@@ -54,6 +54,7 @@ ul {
   }
 }
 .navbar {
+  width: 100%;
   position: fixed;
   top: 0;
   left: 50%;
@@ -959,7 +960,7 @@ ul {
   }
 }
 
-.swal2-center {
-  z-index: 100000000000;
+.swal2-container, .swal2-center, .swal2-backdrop-show {
+  z-index: 1000000000000000000;
 }
 /*# sourceMappingURL=main.css.map */
