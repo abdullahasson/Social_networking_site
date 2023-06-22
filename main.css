@@ -963,4 +963,31 @@ ul {
 .swal2-container, .swal2-center, .swal2-backdrop-show {
   z-index: 1000000000000000000;
 }
+
+
+
+
+/* responsive */
+
+@media (max-width:490px) {
+  .wrapper.animate-signUp .form-wrapper.sign-in {
+    transform: rotate(0deg);
+    animation: animrotatee .7s ease-in-out forwards;
+    animation-delay: .3s;
+    -webkit-animation: animrotatee .7s ease-in-out forwards;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+}
+
+  .form-wrapper.sign-up {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+}
+}
+
 /*# sourceMappingURL=main.css.map */
